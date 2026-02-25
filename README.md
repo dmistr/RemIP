@@ -554,7 +554,7 @@ C:\temp
 
 ## 📝 Version History / История версий
 
-### 2024
+### 2026
 - Initial release of RemIP Suite / Первый релиз RemIP Suite
 - Complete remote management solution / Полное решение для удаленного управления
 - Bilingual interface / Двуязычный интерфейс
