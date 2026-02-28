@@ -4,6 +4,29 @@
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1+-green)
 ![License](https://img.shields.io/badge/License-Free-orange)
 
+**RemIP** – A Universal Assistant for Remote Computer Management
+
+**RemIP** is a program that solves two important tasks: it helps configure a computer for remote access and allows you to manage other computers on the network.
+
+What is it for?
+Imagine you have several computers on a local network (at home or in the office). RemIP allows you to:
+
+Manage Remote Computers:
+  - Shut them down directly from your workstation
+  - Send text messages to other users' screens.
+  - Play voice messages on remote PCs.
+  - Check if a computer is available on the network.
+
+Configure Computers for Remote Management:
+  - Automatically open the necessary ports in the firewall.
+  - Enable required system services.
+  - Set up a secure connection.
+  - Reset settings if something goes wrong.
+
+The program features a simple and intuitive interface with support for two languages (Russian/English) and is suitable for both home use and small offices.
+
+---
+
 **RemIP** - Универсальный помощник для удаленного управления компьютерами
 
 **RemIP** — это программа, которая решает две важные задачи: помогает настроить компьютер для удаленного доступа и позволяет управлять другими компьютерами в сети.
@@ -27,7 +50,7 @@
 
 ---
 
-**Инструкция пользователя / User manual**
+## **Инструкция пользователя / User manual**
 
 [English](#english) | [Русский](#russian)
 
