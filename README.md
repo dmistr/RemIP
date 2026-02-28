@@ -27,565 +27,384 @@
 
 ---
 
-## 🌍 Language / Язык
+**Инструкция пользователя / User manual**
 
-- [English](#english)
-- [Русский](#русский)
+[English](#english) | [Русский](#russian)
 
 ---
 
 ## English
 
-### 📋 Overview
+### Overview
+RemIP is a powerful portable tool for remote computer management and setup. It combines two utilities in one application:
+- **PC Control Mode** - Remotely manage computers (shutdown, messages, diagnostics)
+- **PC Setup Mode** - Configure a computer for remote access (ports, services, WinRM)
 
-**RemIP Suite** consists of two complementary tools for remote PC management:
+The program is distributed as a single executable file - no installation required!
 
-| Program | Purpose |
-|---------|---------|
-| **Install RemIP** | Prepare a computer to accept remote commands (run on target PC) |
-| **RemIP** | Manage remote computers with saved credentials (run on management PC) |
+### System Requirements
+- Windows 7/8/10/11
+- Administrator rights (for setup mode and some control functions)
+- No additional software or frameworks required
 
----
+### Installation
+**No installation needed!** Just download the `RemIP.exe` file and run it.
 
-## Install RemIP - Incoming PC Setup
+**Important**: On first run, Windows SmartScreen might show a warning. Click "More info" and then "Run anyway" - the program is safe to use.
 
-### 🚀 Features
+### First Launch
+When you start RemIP, you'll see the main menu with two options:
+- **PC CONTROL** (blue button) - For remote management
+- **PC SETUP** (green button) - For preparing a computer for remote access
 
-#### 1. Target PC Selection
-| Feature | Description |
-|---------|-------------|
-| Management PC IP | Enter the IP address of the computer that will manage this PC |
+### Interface Elements
 
-#### 2. Setup Functions
-| # | Function | Description |
-|---|----------|-------------|
-| 1 | **FULL SETUP** | Complete configuration (ports + services + WinRM) |
-| 2 | **OPEN PORTS** | Open firewall ports 445, 139, 5985 |
-| 3 | **ENABLE SERVICES** | Enable Server, RemoteRegistry, WinRM services |
-| 4 | **CONFIGURE WINRM** | Configure WinRM and add management PC to TrustedHosts |
-| 5 | **CHECK AND FIX** | Diagnose and automatically fix common issues |
-| 6 | **DIAGNOSTICS** | Check current system state |
-| 7 | **REBOOT** | Reboot the computer |
-| 8 | **RESET SETTINGS** | Remove all changes and restore default security |
+#### Top Panel (visible in all modes)
+- **IP Address Field** - Enter the target computer's IP
+- **Status Indicator** - Shows connection status:
+  - 🟡 Yellow - Checking
+  - 🟢 Green - Online
+  - 🔴 Red - Offline
+- **Language Selector** - Switch between Russian/English
+- **? Button** - About information
+- **◀ BACK Button** - Return to main menu (visible in Control/Setup modes)
+- **✕ Button** - Exit application
 
-#### 3. Interface
-| Feature | Description |
-|---------|-------------|
-| 🌐 Bilingual | Russian/English interface |
-| 🎨 Colored output | Emoji indicators for status |
-| 📊 Progress bar | Visual feedback for operations |
-| 🔒 Fixed window | No resizing, clean layout |
-| 📋 Manual instructions | Shows commands if automatic fix fails |
+#### Progress Bar (visible in Control/Setup modes)
+Shows operation progress (0-100%)
 
-### 📖 User Guide - Install RemIP
+#### Output Window
+Displays all operation results, diagnostics, and status messages with color coding:
+- Cyan - Headers
+- Yellow - Commands
+- Green - Success messages
+- Red - Errors
+- Orange - Warnings
+- White - Regular info
 
-#### 🔧 Initial Setup
+### PC CONTROL Mode
 
-1. **Run the program** as administrator (required for system changes)
-2. **Select language** in the top-right corner
-3. **Enter the IP address** of the computer that will manage this PC
-4. Choose the desired operation from the menu
+This mode allows you to remotely manage computers.
 
-#### 🛠️ Setup Operations
+#### Features:
 
-**Item 1: FULL SETUP**
+1. **Shutdown Now** - Immediate computer shutdown
+2. **Shutdown with Timer** - Set shutdown delay in seconds
+3. **Shutdown + Text** - Send a text message before shutdown
+4. **Shutdown + Voice** - Send a voice message before shutdown
+5. **Text Message** - Send a text message to all users
+6. **Voice Message** - Send a voice message to all users
+7. **Save Credentials** - Save login credentials for the current IP
+8. **Show Saved IPs** - Display all IPs with saved credentials
+9. **Delete Credentials** - Remove saved credentials for current IP
+10. **Diagnostics** - Check connection, WinRM availability, and port 5985
+11. **Clear** - Clear the output window
 
-Performs complete configuration in one click:
-- Opens ports 445, 139, 5985 in firewall
-- Enables Server, RemoteRegistry, WinRM services
-- Configures WinRM and adds management PC to TrustedHosts
+#### How to Use Control Mode:
 
-FULL SETUP
-════════════════════════════════════════
-→ Port setup:
-→ Starting services:
-→ 4. CONFIGURE WINRM
-✅ FULL SETUP COMPLETE
+1. Enter the target computer's IP address
+2. Wait for status indicator to turn green (online)
+3. Save credentials if this is the first time connecting
+4. Select desired action from the buttons
+5. Follow any dialog prompts
+6. Check results in the output window
 
+#### Credentials Storage
+Credentials are saved securely using Windows encryption to:
+`C:\temp\remote_cred_IP.xml` (where IP uses underscores instead of dots)
 
-**Item 2: OPEN PORTS**
+### PC SETUP Mode
 
-Opens required ports in Windows Firewall:
-- **Port 445** - SMB (File Sharing)
-- **Port 139** - NetBIOS
-- **Port 5985** - WinRM (Windows Remote Management)
+This mode configures the local computer for incoming remote connections.
 
-**Item 3: ENABLE SERVICES**
+#### Features:
 
-Starts and enables automatic startup for:
-- **Server service** (LanmanServer) - required for file sharing
-- **RemoteRegistry** - allows remote registry access
-- **WinRM** - Windows Remote Management service
+1. **Full Setup** - Complete configuration (ports + services + WinRM)
+2. **Open Ports** - Configure firewall rules for ports 445, 139, 5985
+3. **Enable Services** - Start and configure Server, RemoteRegistry, WinRM services
+4. **Configure WinRM** - Setup WinRM and add current IP to TrustedHosts
+5. **Check and Fix** - Diagnose and repair configuration issues
+6. **Diagnostics** - Comprehensive system diagnostic
+7. **Reboot** - Restart computer with 30-second delay
+8. **Reset Settings** - Remove all configurations (close ports, disable services, clear TrustedHosts)
+9. **Clear** - Clear the output window
 
-**Item 4: CONFIGURE WINRM**
+#### Ports Configured:
+- **445** - SMB (file sharing)
+- **139** - NetBIOS
+- **5985** - WinRM (Windows Remote Management)
 
-Sets up WinRM for remote management:
-- Runs `winrm quickconfig`
-- Adds management PC IP to TrustedHosts
-- Enables basic authentication
+#### Services Configured:
+- **LanmanServer** - Server service
+- **RemoteRegistry** - Remote registry access
+- **WinRM** - Windows Remote Management
 
-**Item 5: CHECK AND FIX**
+#### How to Use Setup Mode:
 
-Diagnoses and automatically fixes common issues:
-- Checks if services are running
-- Verifies firewall rules
-- Updates TrustedHosts
-- Restarts firewall if needed
+1. **Run as Administrator** - Most functions require admin rights (right-click the .exe and select "Run as administrator")
+2. Enter the IP that will connect to this computer
+3. Select desired setup option
+4. Monitor progress in the output window
+5. Use Diagnostics to verify configuration
 
-If automatic fix fails, displays manual instructions:
-
-📋 MANUAL FIREWALL COMMANDS
-══════════════════════════════════════════════════
-Some rules could not be created automatically.
-
-Delete old rules:
-→ netsh advfirewall firewall delete rule name="SMB 445"
-→ netsh advfirewall firewall delete rule name="WinRM 5985"
-→ netsh advfirewall firewall delete rule name="NetBIOS 139"
-
-Create new rules:
-→ netsh advfirewall firewall add rule name="SMB 445" dir=in action=allow protocol=TCP localport=445
-→ netsh advfirewall firewall add rule name="WinRM 5985" dir=in action=allow protocol=TCP localport=5985
-→ netsh advfirewall firewall add rule name="NetBIOS 139" dir=in action=allow protocol=TCP localport=139
-
-⚠️ Run these commands as administrator!
-
-
-**Item 6: DIAGNOSTICS**
-
-Checks current system state:
-- Port status (445, 139, 5985)
-- Service status (Server, RemoteRegistry, WinRM)
-- Firewall rules presence
-- TrustedHosts configuration
-
-Example output:
-
-SYSTEM DIAGNOSTICS
-════════════════════════════════════════
-
-PORT STATUS:
-✅ Port 445 (SMB): ACTIVE
-✅ Port 139 (NetBIOS): ACTIVE
-✅ Port 5985 (WinRM): ACTIVE
-
-SERVICE STATUS:
-✅ Server Service: RUNNING
-✅ RemoteRegistry Service: RUNNING
-✅ WinRM Service: RUNNING
-
-FIREWALL RULES:
-✅ SMB 445 Rule: PRESENT
-✅ WinRM 5985 Rule: PRESENT
-✅ NetBIOS 139 Rule: PRESENT
-
-WINRM SETTINGS:
-TrustedHosts = 192.168.1.2
-
-✅ DIAGNOSTICS COMPLETE
-
-
-**Item 7: REBOOT**
-
-- Safely reboots the computer
-- Shows confirmation dialog
-- 30-second countdown before restart
-
-**Item 8: RESET SETTINGS**
-
-Removes all changes and restores default security:
-- Deletes all created firewall rules
-- Stops and disables RemoteRegistry and WinRM services
+#### Reset Function
+The reset option completely removes all configurations:
+- Deletes firewall rules
+- Stops and disables services
 - Clears TrustedHosts
-- Restarts firewall
+- May offer to create blocking rules for stubborn open ports
 
-⚠️ **Warning:** This reverts all changes made by the program!
+### Language Switching
+You can switch between Russian and English at any time:
+- Use the language selector in the top panel
+- Interface text updates immediately
+- Output window content updates with current language
 
----
+### Troubleshooting
 
-## RemIP - Remote PC Management
+#### Connection Issues:
+1. Check if target computer is online (status indicator)
+2. Run Diagnostics in Control mode
+3. Ensure WinRM is configured (use Setup mode on target)
+4. Verify firewall allows port 5985
+5. Check TrustedHosts configuration
 
-### 🚀 Features
+#### Setup Issues:
+1. **Always run as Administrator** for setup functions
+2. Use "Check and Fix" to diagnose problems
+3. Check Windows Firewall settings
+4. Verify services are running
+5. Try Full Setup if individual steps fail
 
-#### 1. Target PC Selection
-| Feature | Description |
-|---------|-------------|
-| Manual IP input | Enter any IP address in the local network |
-| IP history | Automatically saves used IPs |
-| Availability check | Ping test before executing commands |
+#### Common Error Messages:
+- **"Administrator rights required!"** - Right-click RemIP.exe and select "Run as administrator"
+- **"Credentials not found"** - Save credentials first
+- **"WinRM is unavailable"** - Configure WinRM in Setup mode
+- **"Port 5985 is closed"** - Check firewall rules
 
-#### 2. Power Management
-| # | Function | Description |
-|---|----------|-------------|
-| 1 | **SHUTDOWN NOW** | Instant remote PC shutdown |
-| 2 | **SHUTDOWN WITH TIMER** | Shutdown after specified seconds |
-| 3 | **SHUTDOWN + TEXT** | Shutdown with text notification |
-| 4 | **SHUTDOWN + VOICE** | Shutdown with voice warning |
+### Security Notes
+- Credentials are stored encrypted using Windows Data Protection API
+- TrustedHosts should only contain trusted IP addresses
+- Opening ports increases attack surface - use only in trusted networks
+- Reset settings when remote access is no longer needed
 
-#### 3. Message Sending
-| # | Function | Description |
-|---|----------|-------------|
-| 5 | **TEXT MESSAGE** | Pop-up windows on remote PC |
-| 6 | **VOICE MESSAGE** | Speech synthesis via System.Speech |
+### Version History
+- **v0.76** - Combined interface, improved diagnostics, language support
+- **v0.75** - Bug fixes and UI improvements
+- **v0.74** - Added language switching
+- **v0.73** - First combined version
 
-#### 4. Credential Management
-| # | Function | Description |
-|---|----------|-------------|
-| 7 | **SAVE CREDENTIALS** | Secure encrypted storage of logins and passwords |
-| 8 | **SHOW SAVED IPs** | View all saved addresses |
-| 9 | **DELETE CREDENTIALS** | Clear saved data for selected IP |
+### Author
+**dmistr**
+- Email: dmistr9999@gmail.com
+- GitHub: https://github.com/dmistr/RemIP
 
-#### 5. Diagnostics
-| # | Function | Description |
-|---|----------|-------------|
-| 10 | **DIAGNOSTICS** | Check PC availability, WinRM, port 5985 |
+### Distribution
+The program is distributed as a single executable file: `RemIP.exe`
+- No installation required
+- No dependencies
+- Portable - can be run from USB drive
+- No registry changes
+- No background processes
 
-### 📖 User Guide - RemIP
+### License
+Free for personal and commercial use. Use at your own risk.
 
-#### 🔧 Initial Setup
+**IMPORTANT LICENSE TERMS:**
+- The software is free to use and distribute
+- **When using or distributing any part of the source code, attribution to the original author (dmistr) and a link to the GitHub repository (https://github.com/dmistr/RemIP) are mandatory**
+- This applies to both complete code and any portions thereof
+- Modifications are allowed but must maintain original attribution
 
-1. **Run the program** as administrator (required for WinRM)
-2. **Select language** in the top-right corner
-3. **Enter IP address** of target computer
-4. **Save credentials** (item 7) - enter login and password for remote PC
-
-#### 💻 Power Management
-
-**Item 1: Shutdown Now**
-- Click "1. SHUTDOWN NOW" button
-- Command executes immediately
-
-**Item 2: Shutdown with Timer**
-- Enter seconds until shutdown (e.g., 30, 60, 120)
-- Click OK
-- Command executes after specified time
-
-**Item 3: Shutdown + Text**
-- Enter time in seconds
-- Enter warning text
-- Message window appears on remote PC
-- PC shuts down after specified time
-
-**Item 4: Shutdown + Voice**
-- Enter time in seconds
-- Enter text for voice
-- Voice message plays on remote PC
-- PC shuts down after specified time
-
-#### 💬 Sending Messages
-
-**Item 5: Text Message**
-- Enter message text
-- Pop-up window appears on remote PC for 30 seconds
-
-**Item 6: Voice Message**
-- Enter text for voice
-- Voice message plays on remote PC using text-to-speech
-
-#### 🔐 Credential Management
-
-**Item 7: Save Credentials**
-- Enter login and password for remote PC
-- Data is encrypted and saved in `C:\temp\`
-- Format: `remote_cred_192_168_1_100.xml`
-
-**Item 8: Show Saved IPs**
-- Displays all IPs with saved credentials
-- Shows list of files in `C:\temp\`
-
-**Item 9: Delete Credentials**
-- Deletes saved data for current IP
-- Requires confirmation before deletion
-
-#### 🔍 Diagnostics
-
-**Item 10: Diagnostics**
-
-Performs three checks:
-1. **Ping test** - basic network availability
-2. **WinRM test** - remote management service
-3. **Port 5985 test** - WinRM default port
-
-Output example:
-
-CONNECTION DIAGNOSTICS
-════════════════════════════════════════
-
-PING TEST:
-✅ Computer 192.168.1.166 is online
-
-WINRM TEST:
-✅ WinRM is available
-
-PORT 5985 TEST:
-✅ Port 5985 is open
-
-✅ DIAGNOSTICS COMPLETE
-
-
-#### 🧹 Clear Output
-
-| Button | Function |
-|--------|----------|
-| **CLEAR OUTPUT** | Clears the output window |
+### Download
+Get the latest version from the official GitHub repository:
+https://github.com/dmistr/RemIP
 
 ---
 
-## 🔄 Workflow Example
-
-### Step 1: Prepare target PC (run Install RemIP)
-1. Run **Install RemIP** as administrator on the computer to be managed
-2. Enter management PC IP
-3. Select **1. FULL SETUP**
-4. Verify with **6. DIAGNOSTICS**
-
-### Step 2: Manage remote PC (run RemIP)
-1. Run **RemIP** as administrator on management PC
-2. Enter target PC IP
-3. Select **7. SAVE CREDENTIALS** and enter login/password
-4. Now you can shutdown, send messages, etc.
-
----
-
-## ⚠️ Important Notes (Both Programs)
-
-1. **Administrator Rights** - both programs require administrator privileges
-2. **WinRM** - target PC must have WinRM configured (port 5985)
-3. **Firewall** - port 5985 must be open on target PC's firewall
-4. **Credentials** - stored encrypted, accessible only to current user
-5. **Availability** - programs check PC availability before executing commands
-
-### 📁 File Structure
-
-C:\temp
-
-├── remote_cred_192.168.1.100.xml # Encrypted credentials for IP
-
-├── remote_cred_192.168.1.120.xml # Encrypted credentials for IP
-
-└── ...
-
-
-### 🔧 Troubleshooting
-
-| Error | Solution |
-|-------|----------|
-| ❌ Computer is offline | Check if target PC is turned on and network connection |
-| ❌ WinRM is unavailable | Run Install RemIP on target PC, item 1 or 4 |
-| ❌ Port 5985 is closed | Run Install RemIP on target PC, item 2 |
-| ⚠️ Credentials not found | Save credentials via RemIP item 7 first |
-| ❌ Administrator rights required | Run program as administrator |
-| ❌ Firewall start error | Wait a few seconds and try again |
-
----
-
-## Русский
-
-### 📋 Обзор
-
-**RemIP Suite** состоит из двух взаимодополняющих программ для удаленного управления ПК:
-
-| Программа | Назначение |
-|-----------|------------|
-| **Install RemIP** | Подготовка компьютера к приему удаленных команд (запускать на целевом ПК) |
-| **RemIP** | Управление удаленными компьютерами с сохранением данных (запускать на управляющем ПК) |
-
----
-
-## Install RemIP - Настройка входящего ПК
-
-### 🚀 Функции
-
-#### 1. Выбор целевого ПК
-| Функция | Описание |
-|---------|----------|
-| IP управляющего ПК | IP-адрес компьютера, который будет управлять этим ПК |
-
-#### 2. Функции настройки
-| # | Функция | Описание |
-|---|---------|----------|
-| 1 | **ПОЛНАЯ НАСТРОЙКА** | Полная конфигурация (порты + службы + WinRM) |
-| 2 | **ОТКРЫТЬ ПОРТЫ** | Открыть порты 445, 139, 5985 в брандмауэре |
-| 3 | **ВКЛЮЧИТЬ СЛУЖБЫ** | Включить службы Server, RemoteRegistry, WinRM |
-| 4 | **НАСТРОИТЬ WINRM** | Настроить WinRM и добавить управляющий ПК в TrustedHosts |
-| 5 | **ПРОВЕРИТЬ И ИСПРАВИТЬ** | Диагностика и автоматическое исправление проблем |
-| 6 | **ДИАГНОСТИКА** | Проверка текущего состояния системы |
-| 7 | **ПЕРЕЗАГРУЗИТЬ** | Перезагрузка компьютера |
-| 8 | **СБРОС НАСТРОЕК** | Удаление всех изменений и восстановление безопасности |
-
-### 📖 Инструкция - Install RemIP
-
-#### 🔧 Первоначальная настройка
-
-1. **Запустите программу** от имени администратора
-2. **Выберите язык** в правом верхнем углу
-3. **Введите IP-адрес** управляющего компьютера
-4. Выберите нужную операцию
-
-#### 🛠️ Операции настройки
-
-**Пункт 1: ПОЛНАЯ НАСТРОЙКА**
-- Открывает порты 445, 139, 5985
-- Включает службы Server, RemoteRegistry, WinRM
-- Настраивает WinRM и TrustedHosts
-
-**Пункт 2: ОТКРЫТЬ ПОРТЫ**
-- **Порт 445** - SMB (общий доступ)
-- **Порт 139** - NetBIOS
-- **Порт 5985** - WinRM
-
-**Пункт 3: ВКЛЮЧИТЬ СЛУЖБЫ**
-- Служба Сервер (LanmanServer)
-- RemoteRegistry
-- WinRM
-
-**Пункт 4: НАСТРОИТЬ WINRM**
-- `winrm quickconfig`
-- Добавление IP в TrustedHosts
-- Базовая аутентификация
-
-**Пункт 5: ПРОВЕРИТЬ И ИСПРАВИТЬ**
-- Проверка служб и правил
-- Автоматическое исправление
-- Ручные инструкции при ошибках
-
-**Пункт 6: ДИАГНОСТИКА**
-- Статус портов
-- Состояние служб
-- Правила брандмауэра
-- TrustedHosts
-
-**Пункт 7: ПЕРЕЗАГРУЗИТЬ**
-- Подтверждение
-- 30 секунд до перезагрузки
-
-**Пункт 8: СБРОС НАСТРОЕК**
-- Удаление всех правил
-- Остановка служб
-- Очистка TrustedHosts
-
----
-
-## RemIP - Управление удаленными ПК
-
-### 🚀 Функции
-
-#### 1. Выбор целевого ПК
-| Функция | Описание |
-|---------|----------|
-| Ручной ввод IP | Любой IP-адрес в сети |
-| История IP | Автосохранение использованных адресов |
-| Проверка связи | Ping перед командами |
-
-#### 2. Управление питанием
-| # | Функция | Описание |
-|---|---------|----------|
-| 1 | **ВЫКЛЮЧИТЬ СЕЙЧАС** | Мгновенное выключение |
-| 2 | **ВЫКЛЮЧИТЬ С ТАЙМЕРОМ** | Выключение через N секунд |
-| 3 | **ВЫКЛЮЧИТЬ + ТЕКСТ** | Выключение с уведомлением |
-| 4 | **ВЫКЛЮЧИТЬ + ГОЛОС** | Выключение с голосом |
-
-#### 3. Отправка сообщений
-| # | Функция | Описание |
-|---|---------|----------|
-| 5 | **ТЕКСТОВОЕ СООБЩЕНИЕ** | Всплывающие окна |
-| 6 | **ГОЛОСОВОЕ СООБЩЕНИЕ** | Синтез речи |
-
-#### 4. Управление данными
-| # | Функция | Описание |
-|---|---------|----------|
-| 7 | **СОХРАНИТЬ ДАННЫЕ** | Шифрованное хранение логинов/паролей |
-| 8 | **СПИСОК IP** | Все сохраненные адреса |
-| 9 | **УДАЛИТЬ ДАННЫЕ** | Очистка для выбранного IP |
-
-#### 5. Диагностика
-| # | Функция | Описание |
-|---|---------|----------|
-| 10 | **ДИАГНОСТИКА** | Проверка связи, WinRM, порта 5985 |
-
-### 📖 Инструкция - RemIP
-
-#### 🔧 Начало работы
-
-1. **Запустите** от имени администратора
-2. **Выберите язык**
-3. **Введите IP** целевого ПК
-4. **Сохраните данные** (пункт 7)
-
-#### 💻 Управление
-
-**Пункт 1-4:** Выключение с разными опциями
-**Пункт 5-6:** Отправка сообщений
-**Пункт 7-9:** Управление учетными данными
-**Пункт 10:** Диагностика подключения
-
----
-
-## 🔄 Пример работы
-
-### Шаг 1: Подготовка целевого ПК (Install RemIP)
-1. Запустите **Install RemIP** на целевом ПК (администратор)
-2. Введите IP управляющего ПК
-3. Выберите **1. ПОЛНАЯ НАСТРОЙКА**
-4. Проверьте **6. ДИАГНОСТИКА**
-
-### Шаг 2: Управление (RemIP)
-1. Запустите **RemIP** на управляющем ПК (администратор)
-2. Введите IP целевого ПК
-3. Выберите **7. СОХРАНИТЬ ДАННЫЕ**, введите логин/пароль
-4. Теперь можно выключать, отправлять сообщения и т.д.
-
----
-
-## ⚠️ Важные замечания
-
-1. **Права администратора** - требуются для обеих программ
-2. **WinRM** - должен быть настроен на целевом ПК
-3. **Брандмауэр** - порт 5985 должен быть открыт
-4. **Данные** - хранятся в зашифрованном виде в `C:\temp\`
-5. **Проверка связи** - выполняется перед командами
-
-### 📁 Структура файлов
-
-C:\temp
-
-├── remote_cred_192.168.1.100.xml
-
-├── remote_cred_192.168.1.120.xml
-
-└── ...
-
-
-### 🔧 Устранение неполадок
-
-| Ошибка | Решение |
-|--------|---------|
-| ❌ ПК не отвечает | Проверьте сеть, включен ли ПК |
-| ❌ WinRM недоступен | Запустите Install RemIP, пункт 1 |
-| ❌ Порт 5985 закрыт | Запустите Install RemIP, пункт 2 |
-| ⚠️ Данные не найдены | Сохраните через RemIP, пункт 7 |
-| ❌ Нет прав администратора | Запустите от имени администратора |
-
----
-
-## 📝 Version History / История версий
-
-### 2026
-- Initial release of RemIP Suite / Первый релиз RemIP Suite
-- Complete remote management solution / Полное решение для удаленного управления
-- Bilingual interface / Двуязычный интерфейс
-- Automatic setup and diagnostics / Автоматическая настройка и диагностика
-
----
-
-## 👨‍💻 Author / Автор
-
-Created for remote PC management in local networks.  
-Создано для удаленного управления ПК в локальных сетях.
-
----
-
-## 📄 License / Лицензия
-
-Free for personal and educational use.  
-Бесплатно для личного и образовательного использования.
+## Russian
+
+### Обзор
+RemIP - это мощный портативный инструмент для удаленного управления и настройки компьютеров. Объединяет две утилиты в одном приложении:
+- **Режим УПРАВЛЕНИЕ ПК** - Удаленное управление компьютерами (выключение, сообщения, диагностика)
+- **Режим НАСТРОЙКА ПК** - Подготовка компьютера к удаленному доступу (порты, службы, WinRM)
+
+Программа распространяется в виде одного исполняемого файла - установка не требуется!
+
+### Системные требования
+- Windows 7/8/10/11
+- Права администратора (для режима настройки и некоторых функций управления)
+- Не требует дополнительного ПО или фреймворков
+
+### Установка
+**Установка не нужна!** Просто скачайте файл `RemIP.exe` и запустите его.
+
+**Важно**: При первом запуске Windows SmartScreen может показать предупреждение. Нажмите "Подробнее" и затем "Выполнить в любом случае" - программа безопасна.
+
+### Первый запуск
+При запуске RemIP вы увидите главное меню с двумя опциями:
+- **УПРАВЛЕНИЕ ПК** (синяя кнопка) - Для удаленного управления
+- **НАСТРОЙКА ПК** (зеленая кнопка) - Для подготовки компьютера к удаленному доступу
+
+### Элементы интерфейса
+
+#### Верхняя панель (видна во всех режимах)
+- **Поле IP адреса** - Введите IP целевого компьютера
+- **Индикатор статуса** - Показывает состояние подключения:
+  - 🟡 Желтый - Проверка
+  - 🟢 Зеленый - В сети
+  - 🔴 Красный - Не доступен
+- **Выбор языка** - Переключение между русским/английским
+- **Кнопка ?** - Информация о программе
+- **Кнопка ◀ НАЗАД** - Возврат в главное меню (видна в режимах Управление/Настройка)
+- **Кнопка ✕** - Выход из программы
+
+#### Прогресс-бар (виден в режимах Управление/Настройка)
+Показывает ход выполнения операций (0-100%)
+
+#### Окно вывода
+Отображает все результаты операций, диагностику и статусные сообщения с цветовой кодировкой:
+- Голубой - Заголовки
+- Желтый - Команды
+- Зеленый - Успешные сообщения
+- Красный - Ошибки
+- Оранжевый - Предупреждения
+- Белый - Обычная информация
+
+### Режим УПРАВЛЕНИЕ ПК
+
+Этот режим позволяет удаленно управлять компьютерами.
+
+#### Функции:
+
+1. **ВЫКЛЮЧИТЬ СЕЙЧАС** - Немедленное выключение компьютера
+2. **ВЫКЛЮЧИТЬ С ТАЙМЕРОМ** - Установка задержки выключения в секундах
+3. **ВЫКЛЮЧИТЬ + ТЕКСТ** - Отправка текстового сообщения перед выключением
+4. **ВЫКЛЮЧИТЬ + ГОЛОС** - Отправка голосового сообщения перед выключением
+5. **ТЕКСТОВОЕ СООБЩЕНИЕ** - Отправка текста всем пользователям
+6. **ГОЛОСОВОЕ СООБЩЕНИЕ** - Отправка голосового сообщения всем пользователям
+7. **СОХРАНИТЬ УЧЁТНЫЕ ДАННЫЕ** - Сохранение логина/пароля для текущего IP
+8. **СПИСОК IP** - Показать все IP с сохраненными данными
+9. **УДАЛИТЬ ДАННЫЕ** - Удалить сохраненные данные для текущего IP
+10. **ДИАГНОСТИКА** - Проверка подключения, доступности WinRM и порта 5985
+11. **ОЧИСТИТЬ** - Очистка окна вывода
+
+#### Как использовать режим Управление:
+
+1. Введите IP целевого компьютера
+2. Дождитесь зеленого индикатора (в сети)
+3. Сохраните учетные данные при первом подключении
+4. Выберите нужное действие из кнопок
+5. Следуйте диалоговым подсказкам
+6. Проверьте результаты в окне вывода
+
+#### Хранение учетных данных
+Учетные данные сохраняются с шифрованием Windows в:
+`C:\temp\remote_cred_IP.xml` (где IP использует подчеркивания вместо точек)
+
+### Режим НАСТРОЙКА ПК
+
+Этот режим настраивает локальный компьютер для входящих удаленных подключений.
+
+#### Функции:
+
+1. **ПОЛНАЯ НАСТРОЙКА** - Полная конфигурация (порты + службы + WinRM)
+2. **ОТКРЫТЬ ПОРТЫ** - Настройка правил брандмауэра для портов 445, 139, 5985
+3. **ВКЛЮЧИТЬ СЛУЖБЫ** - Запуск и настройка служб Server, RemoteRegistry, WinRM
+4. **НАСТРОИТЬ WINRM** - Настройка WinRM и добавление текущего IP в TrustedHosts
+5. **ПРОВЕРИТЬ И ИСПРАВИТЬ** - Диагностика и исправление проблем конфигурации
+6. **ДИАГНОСТИКА** - Полная диагностика системы
+7. **ПЕРЕЗАГРУЗИТЬ** - Перезагрузка компьютера с задержкой 30 секунд
+8. **СБРОС НАСТРОЕК** - Удаление всех конфигураций (закрытие портов, отключение служб, очистка TrustedHosts)
+9. **ОЧИСТИТЬ** - Очистка окна вывода
+
+#### Настраиваемые порты:
+- **445** - SMB (общий доступ к файлам)
+- **139** - NetBIOS
+- **5985** - WinRM (удаленное управление Windows)
+
+#### Настраиваемые службы:
+- **LanmanServer** - Служба Сервер
+- **RemoteRegistry** - Удаленный доступ к реестру
+- **WinRM** - Удаленное управление Windows
+
+#### Как использовать режим Настройка:
+
+1. **Запустите от администратора** - Большинство функций требуют прав администратора (нажмите правой кнопкой на .exe и выберите "Запуск от имени администратора")
+2. Введите IP компьютера, который будет подключаться к этому ПК
+3. Выберите нужную опцию настройки
+4. Следите за прогрессом в окне вывода
+5. Используйте Диагностику для проверки конфигурации
+
+#### Функция Сброс
+Опция сброса полностью удаляет все конфигурации:
+- Удаляет правила брандмауэра
+- Останавливает и отключает службы
+- Очищает TrustedHosts
+- Может предложить создать блокирующие правила для "упрямых" открытых портов
+
+### Переключение языка
+Вы можете переключаться между русским и английским в любое время:
+- Используйте селектор языка на верхней панели
+- Текст интерфейса обновляется мгновенно
+- Содержимое окна вывода обновляется на текущем языке
+
+### Устранение неполадок
+
+#### Проблемы подключения:
+1. Проверьте, доступен ли целевой компьютер (индикатор статуса)
+2. Запустите Диагностику в режиме Управление
+3. Убедитесь, что WinRM настроен (используйте режим Настройка на целевом ПК)
+4. Проверьте, разрешает ли брандмауэр порт 5985
+5. Проверьте конфигурацию TrustedHosts
+
+#### Проблемы настройки:
+1. **Всегда запускайте от имени администратора** для функций настройки
+2. Используйте "ПРОВЕРИТЬ И ИСПРАВИТЬ" для диагностики проблем
+3. Проверьте настройки брандмауэра Windows
+4. Убедитесь, что службы запущены
+5. Попробуйте ПОЛНУЮ НАСТРОЙКУ, если отдельные шаги не работают
+
+#### Частые сообщения об ошибках:
+- **"Нужны права администратора!"** - Нажмите правой кнопкой на RemIP.exe и выберите "Запуск от имени администратора"
+- **"Учётные данные не найдены"** - Сначала сохраните учетные данные
+- **"WinRM недоступен"** - Настройте WinRM в режиме Настройка
+- **"Порт 5985 закрыт"** - Проверьте правила брандмауэра
+
+### Замечания по безопасности
+- Учетные данные хранятся зашифрованными с использованием Windows Data Protection API
+- TrustedHosts должен содержать только доверенные IP-адреса
+- Открытие портов увеличивает поверхность атаки - используйте только в доверенных сетях
+- Выполняйте сброс настроек, когда удаленный доступ больше не нужен
+
+### История версий
+- **v0.76** - Объединенный интерфейс, улучшенная диагностика, поддержка языков
+- **v0.75** - Исправление ошибок и улучшение интерфейса
+- **v0.74** - Добавлено переключение языка
+- **v0.73** - Первая объединенная версия
+
+### Автор
+**dmistr**
+- Почта: dmistr9999@gmail.com
+- GitHub: https://github.com/dmistr/RemIP
+
+### Распространение
+Программа распространяется в виде одного исполняемого файла: `RemIP.exe`
+- Не требует установки
+- Не имеет зависимостей
+- Портативная - можно запускать с USB-накопителя
+- Не вносит изменения в реестр
+- Не оставляет фоновых процессов
+
+### Лицензия
+Бесплатно для личного и коммерческого использования. Используйте на свой страх и риск.
+
+**ВАЖНЫЕ УСЛОВИЯ ЛИЦЕНЗИИ:**
+- Программу можно свободно использовать и распространять
+- **При использовании или распространении любой части исходного кода обязательно указание автора (dmistr) и ссылки на репозиторий GitHub (https://github.com/dmistr/RemIP)**
+- Это относится как к полному коду, так и к любым его фрагментам
+- Разрешено модифицировать код при сохранении указания авторства
+
+### Скачивание
+Последнюю версию можно получить в официальном репозитории GitHub:
+https://github.com/dmistr/RemIP
