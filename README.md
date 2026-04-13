@@ -1,406 +1,297 @@
-![Windows](https://img.shields.io/badge/Platform-Windows-blue)
-![PowerShell](https://img.shields.io/badge/PowerShell-5.1+-green)
-![Python](https://img.shields.io/badge/Python-3.14-green)
-![License](https://img.shields.io/badge/License-Free-orange)
+[![License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)]()
+[![Python](https://img.shields.io/badge/Python-3.14%2B-yellow.svg)]()
+[![PyQt](https://img.shields.io/badge/PyQt-6.0%2B-brightgreen.svg)]()
+[![Downloads](https://img.shields.io/github/downloads/dmistr/Remip/total.svg)](https://github.com/dmistr/Remip/releases)
 
 # RemIP - Remote IP Control
 
-**Универсальный инструмент удалённого управления ПК по IP**
+Универсальный инструмент удалённого управления ПК по IP
 
-👤 **Автор:** dmistr  
-📧 **Email:** dmistr9999@gmail.com  
+👤 **Автор:** dmistr
+📧 **Email:** dmistr9999@gmail.com
 🐙 **GitHub:** https://github.com/dmistr/Remip
 
 ---
 
 ## 🌐 Языки / Languages
-- [Русский](#russian)
-- [English](#english)
+
+[🇷🇺 Русский](#русский) | [🇬🇧 English](#english)
 
 ---
 
-<a name="russian"></a>
-## 📋 ОПИСАНИЕ ПРОГРАММЫ
+## 🇷🇺 Русский
 
-RemIP — это мощный инструмент для удалённого управления компьютерами в локальной сети. Программа состоит из трех основных режимов:
+### 📋 ОПИСАНИЕ ПРОГРАММЫ
+
+RemIP — это портативный инструмент для удалённого управления компьютерами в локальной сети. Не требует установки, достаточно запустить EXE-файл. Программа состоит из трёх основных режимов и окна настроек.
+
+---
 
 ### 🔹 Режим УПРАВЛЕНИЕ ПК (Control)
-Позволяет удалённо управлять компьютерами, на которых уже настроен удалённый доступ:
-- Выключение/перезагрузка (мгновенно, с таймером, с сообщением, с голосом)
-- Отправка текстовых и голосовых сообщений
-- Диагностика подключения (ping, порты, WinRM, права)
-- Сохранение учётных данных для быстрого доступа
+
+Позволяет удалённо управлять компьютерами, на которых уже настроен WinRM.
+
+#### 🔑 Учётные данные
+
+| Элемент | Описание |
+|---------|----------|
+| Поле ввода IP | Ввод IP-адреса удалённого компьютера |
+| Кнопка статуса (▶/✓/⛌) | Проверяет доступность ПК по ping. Меняет цвет: серый — не проверен, жёлтый — проверка, зелёный — онлайн, красный — офлайн |
+| Выпадающий список IP | Содержит все сохранённые IP. Галочка ✓ рядом с IP означает, что учётные данные проверены и работают |
+| Кнопка «ВВЕСТИ И СОХРАНИТЬ» | Открывает диалог ввода логина и пароля. После сохранения проверяет данные и ставит ✓ при успехе |
+| Кнопка «ОЧИСТИТЬ СПИСОК IP» | Удаляет все сохранённые учётные данные и очищает TrustedHosts |
+
+#### 🔴 Выключение компьютера
+
+| Кнопка | Описание |
+|--------|----------|
+| **ВЫКЛЮЧИТЬ СЕЙЧАС** | Мгновенная отправка команды `shutdown /s /f /t 0` |
+| **ВЫКЛЮЧИТЬ С ТАЙМЕРОМ** | Выключение через указанное количество секунд |
+| **ВЫКЛЮЧИТЬ + ТЕКСТ** | Показывает текстовое сообщение перед выключением |
+| **ВЫКЛЮЧИТЬ + ГОЛОС** | Озвучивает сообщение через системный синтезатор речи, затем выключает ПК |
+
+#### 💬 Сообщения
+
+| Кнопка | Описание |
+|--------|----------|
+| **ТЕКСТОВОЕ СООБЩЕНИЕ** | Отправляет текст через команду `msg`. Поддерживает русский и английский языки |
+| **ГОЛОСОВОЕ СООБЩЕНИЕ** | Озвучивает текст на удалённом ПК через `System.Speech.SpeechSynthesizer` |
+
+#### 🔧 Сервис
+
+| Кнопка | Описание |
+|--------|----------|
+| **ВКЛЮЧИТЬ/ОТКЛЮЧИТЬ WINRM** | Управляет службой WinRM на вашем локальном компьютере. При включении автоматически синхронизирует TrustedHosts со всеми сохранёнными IP |
+| **ДИАГНОСТИКА** | Полная проверка: ping, порт 5985, WinRM, учётные данные, права администратора, UAC, пустой пароль, создание временных файлов |
+| **ОЧИСТИТЬ** | Очищает окно вывода терминала |
+
+#### ⚙️ Режимы выключения (переключатель «Анти-отмена»)
+
+| Режим | Описание |
+|-------|----------|
+| **Обычный** | Просто отправляет команду `shutdown`. Пользователь может отменить выключение командой `shutdown /a` |
+| **Защищённый** | После отправки команды ждёт указанное в настройках время и проверяет, выключился ли ПК. Если нет — отправляет принудительную команду повторно (до 2 попыток) |
+
+---
 
 ### 🔹 Режим НАСТРОЙКА ПК (Install)
-Позволяет подготовить компьютер к удалённому управлению:
-- Открытие необходимых портов (445, 139, 5985)
-- Настройка сетевых профилей
-- Включение/отключение служб (Server, RemoteRegistry, WinRM)
-- Разрешение пустого пароля для учётных записей
-- Полная диагностика системы
+
+Позволяет подготовить текущий компьютер к удалённому управлению.
+
+#### 🚀 Экспресс
+
+| Кнопка | Описание |
+|--------|----------|
+| **БЫСТРАЯ НАСТРОЙКА** | Одним нажатием: открывает порты 445, 139, 5985 для всех профилей, включает службы Server, RemoteRegistry, WinRM, разрешает пустой пароль, настраивает TrustedHosts |
+| **УМНАЯ НАСТРОЙКА** | Диагностирует текущее состояние и показывает диалог с выбором, что именно нужно исправить. Пользователь отмечает нужные пункты и применяет только их |
+
+#### 🔌 Расширенная настройка
+
+Каждая кнопка-переключатель показывает текущее состояние цветом: 🟩 — активно/открыто, 🟥 — не активно/закрыто.
+
+| Группа | Кнопки | Описание |
+|--------|--------|----------|
+| **ПОРТЫ** | 445, 139, 5985 | Открытие/закрытие портов в брандмауэре. При открытии порта 5985 автоматически включается WinRM |
+| **ПРОФИЛИ** | 🏠 Частная, 🌍 Общественная, 🏢 Доменная | Выбор сетевых профилей, для которых применяются правила брандмауэра |
+| **ПУСТОЙ ПАРОЛЬ** | РАЗРЕШИТЬ/ЗАПРЕТИТЬ | Управляет параметром реестра `LimitBlankPasswordUse`. Разрешает вход в систему без пароля |
+| **СЛУЖБЫ** | Server, RemoteRegistry, WinRM | Включение/отключение служб и настройка их автозапуска |
+
+#### 🔧 Сервис
+
+| Кнопка | Описание |
+|--------|----------|
+| **ДИАГНОСТИКА** | Проверяет: профиль сети, состояние портов (netstat + правила брандмауэра), статус служб, TrustedHosts, пустой пароль |
+| **СБРОС** | Удаляет все правила брандмауэра, останавливает службы, запрещает пустой пароль, очищает TrustedHosts |
+| **ОЧИСТИТЬ** | Очищает окно вывода |
+
+---
 
 ### 🔹 Режим КАРТА СЕТИ (Network Map)
-Автоматическое сканирование локальной сети:
-- Обнаружение всех активных устройств
-- Определение открытых портов
-- Проверка доступности WinRM
-- Сохранение результатов между сессиями
-- Быстрое переключение в режим управления
+
+Сканирует локальную сеть и отображает все найденные устройства.
+
+#### 🔍 Сканирование
+
+| Кнопка | Описание |
+|--------|----------|
+| **⚡ БЫСТРОЕ** | Проверяет основные порты: 135, 139, 445, 5985, 3389, 80, 443. Время: ~30 секунд |
+| **🔍 ПОЛНОЕ** | Проверяет расширенный список портов (включая 21, 22, 25, 110, 143, 3306, 5432, 8080). Время: 1-5 минут |
+| **📋 ARP** | Получает список устройств из ARP-таблицы и сканирует только их. Самый быстрый способ |
+| **⏹ СТОП** | Останавливает текущее сканирование |
+| **🗑️ ОЧИСТИТЬ** | Удаляет все результаты сканирования |
+
+#### 📊 Таблица устройств
+
+В **компактном режиме** (кнопка ▶) показывает: IP, Имя, Статус.
+
+В **расширенном режиме** (кнопка ◀) показывает: ☑ чекбокс, Статус, IP, Имя, Открытые порты, WinRM, Данные.
+
+| Столбец | Описание |
+|---------|----------|
+| ☑ Чекбокс | Отображается только для устройств со статусом 🟢. Позволяет выбрать несколько устройств для групповых действий |
+| Статус | 🟢 — WinRM доступен и есть учётные данные; 🟡 — WinRM доступен, нет данных; 🔵 — требуется настройка WinRM; 🔴 — не поддерживает WinRM |
+| IP | IP-адрес устройства |
+| Имя | Имя хоста (определяется через DNS) или предполагаемая ОС |
+| Открытые порты | Список открытых портов, найденных при сканировании |
+| WinRM | ✅ — доступен, ❌ — недоступен |
+| Данные | ✅ — учётные данные сохранены, ❌ — нет |
+
+**Сортировка:** клик по заголовку столбца (Статус, IP, Имя, WinRM, Данные) сортирует таблицу по возрастанию/убыванию.
+
+#### 👥 Групповые действия
+
+Доступны только в расширенном режиме при выборе устройств со статусом 🟢.
+
+| Кнопка | Описание |
+|--------|----------|
+| **🔴 ВЫКЛЮЧИТЬ** | Отправляет команду `shutdown /s /f /t 0` на все выбранные устройства |
+| **💬 СООБЩЕНИЕ** | Отправляет один и тот же текст на все выбранные устройства |
+| **🎤 ГОЛОС** | Озвучивает текст на всех выбранных устройствах. Для синхронизации добавляет паузу в начало: первый ПК ждёт дольше всех, последний — без задержки |
+
+#### 🖱️ Действия с устройством
+
+| Действие | Результат |
+|----------|-----------|
+| Двойной клик | Переключает в режим «Управление ПК» и подставляет IP |
+| Правый клик | Открывает контекстное меню: «Использовать IP», «Сохранить учётные данные», «Диагностика», «Подробности» |
 
 ---
 
-## 🚀 ИНСТРУКЦИЯ ДЛЯ ПОЛЬЗОВАТЕЛЯ
+### ⚙️ ОКНО НАСТРОЕК
 
-### ⚡ Быстрый старт
-1. Запустите программу (рекомендуется от имени администратора)
-2. Выберите нужный режим:
-   - 🖥️ **УПРАВЛЕНИЕ ПК** — для управления уже настроенными ПК
-   - 🛠️ **НАСТРОЙКА ПК** — для подготовки компьютера к удалённому управлению
-   - 🗺️ **КАРТА СЕТИ** — для поиска устройств в сети
+Вызывается кнопкой ⚙️ в верхней панели.
 
----
-
-## 🖥️ РЕЖИМ УПРАВЛЕНИЯ ПК
-
-### 🔑 Учётные данные
-1. Введите IP удалённого компьютера
-2. Нажмите 💾 **ВВЕСТИ И СОХРАНИТЬ**
-3. Введите имя пользователя и пароль (можно оставить имя по умолчанию)
-4. IP автоматически добавится в список сохранённых и в TrustedHosts
-
-### 📋 Список сохранённых IP
-- Выберите IP из выпадающего списка
-- Правый клик на IP — удалить из списка
-- Кнопка 🗑️ **ОЧИСТИТЬ СПИСОК IP** — удалить все сохранённые записи
-
-### 🔴 Выключение компьютера
-- ⚡ **ВЫКЛЮЧИТЬ СЕЙЧАС** — мгновенное завершение работы
-- ⏱️ **ВЫКЛЮЧИТЬ С ТАЙМЕРОМ** — выключение через N секунд
-- 💬 **ВЫКЛЮЧИТЬ + ТЕКСТ** — показать сообщение и выключить
-- 🎤 **ВЫКЛЮЧИТЬ + ГОЛОС** — озвучить сообщение и выключить
-
-### 💬 Сообщения
-- 📝 **ТЕКСТОВОЕ СООБЩЕНИЕ** — отправить текст на удалённый ПК
-- 🗣️ **ГОЛОСОВОЕ СООБЩЕНИЕ** — озвучить текст на удалённом ПК
-
-### 🔧 Сервис
-- 🔄 **ВКЛ/ВЫКЛ WINRM** — управление службой WinRM на вашем ПК
-- 📊 **ДИАГНОСТИКА** — полная проверка подключения
-- 🧹 **ОЧИСТИТЬ** — очистить окно вывода
-
-### ⚙️ Режимы выключения
-- ⚡ **Обычный** — просто отправляет команду
-- 🛡️ **Защищённый** — проверяет результат и принудительно выключает при необходимости
+| Настройка | Описание |
+|-----------|----------|
+| **Задержка перед проверкой выключения** | Время в секундах (15-99), через которое программа проверяет, выключился ли ПК в защищённом режиме. Рекомендуется 25 секунд |
+| **Синхронизация голоса** | Задержка между устройствами при групповой отправке голоса (0-3 сек, шаг 0.1). Первый ПК ждёт дольше всех, последний — без задержки |
+| **Автоматическая диагностика** | При входе в режим «Настройка ПК» автоматически запускать проверку состояния |
+| **Автопроверка обновлений** | При запуске проверять наличие новой версии на GitHub |
+| **Язык интерфейса** | Русский или English |
+| **Тема оформления** | Светлая или тёмная |
+| **Логирование** | Включить/выключить запись логов. Кнопка «📂 ЛОГИ» открывает папку с лог-файлами |
 
 ---
 
-## 🛠️ РЕЖИМ НАСТРОЙКИ ПК
+### 🚀 АВТООБНОВЛЕНИЕ
 
-### 🚀 Экспресс
-- ⚡ **БЫСТРАЯ НАСТРОЙКА** — одним нажатием открывает все порты, включает службы и настраивает WinRM
-- 💡 **УМНАЯ НАСТРОЙКА** — диагностирует состояние и предлагает выбрать, что исправить
-
-### 🔌 Расширенная настройка (🟩 — открыт, 🟥 — закрыт)
-- 🌐 **ПОРТЫ** — кнопки-переключатели для портов 445, 139, 5985
-- 🛡️ **ПРОФИЛИ** — выбор сетевых профилей (🏠 Частная, 🌍 Общественная, 🏢 Доменная)
-- 🔑 **ПУСТОЙ ПАРОЛЬ** — разрешение/запрет входа без пароля
-- 🖥️ **СЛУЖБЫ** — управление службами Server, RemoteRegistry, WinRM
-
-### 🔧 Сервис
-- 📊 **ДИАГНОСТИКА** — полная проверка портов, служб и правил брандмауэра
-- 🗑️ **СБРОС** — сброс всех настроек (закрытие портов, отключение служб)
-- 🧹 **ОЧИСТИТЬ** — очистить окно вывода
+- При запуске программа проверяет наличие новой версии на GitHub
+- Если обновление доступно — в верхней панели появляется значок 🔔
+- При клике на 🔔 открывается окно с информацией о новой версии
+- Кнопка «Скачать» загружает новый EXE в папку с программой
+- После загрузки кнопка меняется на «Перезапустить сейчас» — программа закрывается и открывает новую версию
 
 ---
 
-## 🗺️ РЕЖИМ КАРТЫ СЕТИ
+### 📤 ОБРАТНАЯ СВЯЗЬ
 
-### 🔍 Сканирование
-- ⚡ **БЫСТРОЕ** — проверка основных портов (< 1 минуты)
-- 🔍 **ПОЛНОЕ** — проверка всех портов (1-5 минут)
-- 📋 **ИЗ ARP-ТАБЛИЦЫ** — просмотр активных устройств (< 1 минуты)
+В окне «О программе» (кнопка **?**) нажмите **📤 Обратная связь**:
 
-### 📊 Обозначения
-- 🟢 — WinRM доступен и есть учётные данные
-- 🟡 — WinRM доступен, но нет учётных данных
-- ⚪ — WinRM отсутствует
+1. Опишите проблему или предложение
+2. Укажите email для ответа (необязательно)
+3. Нажмите «Отправить»
 
-### 🖱️ Действия
-- Двойной клик — перейти в режим управления
-- Правый клик — контекстное меню с действиями
-- ▶/◀ — развернуть/свернуть подробную информацию
-
-### 💾 Сохранение результатов
-- Результаты автоматически сохраняются во временный файл
-- При повторном открытии карты сети данные восстанавливаются
-- Кнопка 🗑️ **ОЧИСТИТЬ РЕЗУЛЬТАТЫ** — удаляет все сохранённые данные
+Программа автоматически прикрепит:
+- Версию Remip и системную информацию (Windows, архитектура, тема, язык, IP, статус WinRM)
+- Последние 500 строк лог-файла
 
 ---
 
-## ❓ FAQ (Часто задаваемые вопросы)
+### 📝 Системные требования
 
-### 1. Почему программа требует права администратора?
-Для изменения правил брандмауэра, управления службами и настройки WinRM необходимы права администратора. Без них большинство функций в режиме настройки работать не будут.
-
-### 2. Какие порты нужны для удалённого управления?
-- **5985** — WinRM (обязателен)
-- **445** — SMB (для доступа к файлам, необязателен)
-- **139** — NetBIOS (для старых систем, необязателен)
-
-### 3. Почему не получается подключиться к удалённому ПК?
-Проверьте по порядку:
-1. ✅ ПК включён и в сети (ping)
-2. ✅ Порт 5985 открыт (диагностика)
-3. ✅ WinRM доступен (диагностика)
-4. ✅ Учётные данные сохранены
-5. ✅ На удалённом ПК настроен WinRM (режим НАСТРОЙКА ПК)
-
-### 4. Как настроить новый ПК для удалённого управления?
-Запустите RemIP на целевом ПК, перейдите в режим **НАСТРОЙКА ПК** и нажмите ⚡ **ЭКСПРЕСС НАСТРОЙКА**.
-
-### 5. Безопасно ли использовать пустой пароль?
-Пустой пароль — это потенциальная угроза безопасности. Используйте эту опцию только в изолированной локальной сети. Рекомендуется всегда устанавливать пароль для учётных записей.
-
-### 6. Почему карта сети не видит некоторые устройства?
-- Устройство может отключать ping (ICMP)
-- Брандмауэр может блокировать порты
-- Устройство может быть в другой подсети
-- Попробуйте полное сканирование или сканирование из ARP-таблицы
-
-### 7. Как удалить сохранённый IP?
-**Способ 1:** В режиме УПРАВЛЕНИЕ выберите IP в списке, нажмите правой кнопкой и выберите "Удалить".  
-**Способ 2:** Нажмите 🗑️ **ОЧИСТИТЬ СПИСОК IP** для удаления всех записей.
-
-### 8. Почему после перезагрузки ПК не виден в карте сети?
-IP-адрес мог измениться (если используется DHCP). Используйте сканирование из ARP-таблицы или задайте статический IP.
-
-### 9. Как обновить программу?
-1. Нажмите на "?" рядом с кнопкой закрыть и проверьте обновление.
-2. Скачайте новую версию напрямую с GitHub. Все сохранённые данные останутся в папке `%APPDATA%\RemIP\`.
-
-### 10. Куда сохраняются учётные данные?
-Все данные хранятся в зашифрованном виде в папке:  
-`%APPDATA%\RemIP\credentials\`
+| Компонент | Требование |
+|-----------|------------|
+| ОС | Windows 10/11, Windows Server 2019/2022 |
+| Права | Администратор (для полной функциональности) |
+| PowerShell | 5.1+ |
+| .NET Framework | 4.8+ |
 
 ---
 
-## 📝 Системные требования
-- **ОС:** Windows 10/11, Windows Server 2019/2022
-- **Права:** Администратор (для режима настройки)
+### 📞 Контакты
+
+По всем вопросам и предложениям: **dmistr9999@gmail.com**
 
 ---
 
-## 🐛 Известные проблемы и решения
+## 🇬🇧 English
 
-| Проблема | Решение |
-|----------|--------|
-| Не открываются диалоги | Проверьте, что программа не запущена несколько раз |
-| Не работают PowerShell команды | Выполните в PowerShell: `Set-ExecutionPolicy RemoteSigned` |
-| Карта сети не видит устройства | Проверьте брандмауэр, попробуйте сканирование из ARP |
-| Не удаётся сохранить учётные данные | Проверьте права на запись в папку `%APPDATA%\RemIP\` |
+### 📋 PROGRAM DESCRIPTION
 
----
-
-## 📞 Контакты
-По всем вопросам и предложениям:
-- 📧 **Email:** dmistr9999@gmail.com
-- 🐙 **GitHub:** https://github.com/dmistr/RemIP
-
----
-
-<a name="english"></a>
-# RemIP - Remote IP Control
-
-**Universal PC remote management tool over IP**
-
-👤 **Author:** dmistr  
-📧 **Email:** dmistr9999@gmail.com  
-🐙 **GitHub:** https://github.com/dmistr/Remip
-
----
-
-## 📋 PROGRAM DESCRIPTION
-
-RemIP is a powerful tool for remote computer management in local networks. The program consists of three main modes:
+RemIP is a portable tool for remote computer management in local networks. No installation required — just run the EXE file.
 
 ### 🔹 PC CONTROL Mode
-Allows remote management of computers that already have remote access configured:
-- Shutdown/restart (instant, with timer, with message, with voice)
-- Send text and voice messages
-- Connection diagnostics (ping, ports, WinRM, permissions)
-- Save credentials for quick access
+
+Remote management of computers with WinRM already configured.
+
+| Feature | Description |
+|---------|-------------|
+| **Credentials** | Save username/password for each IP. Verified credentials show a ✓ checkmark |
+| **Shutdown** | Instant, with timer, with text message, or with voice announcement |
+| **Messages** | Send text via `msg` command or voice via Windows Speech Synthesizer |
+| **Anti-cancel mode** | Checks if PC actually shut down and retries if necessary |
 
 ### 🔹 PC SETUP Mode
-Prepares a computer for remote management:
-- Open required ports (445, 139, 5985)
-- Configure network profiles
-- Enable/disable services (Server, RemoteRegistry, WinRM)
-- Allow blank passwords for accounts
-- Full system diagnostics
+
+Prepares current computer for remote management.
+
+| Feature | Description |
+|---------|-------------|
+| **Fast Setup** | One-click: opens ports, enables services, allows blank password |
+| **Smart Setup** | Diagnoses and lets you choose what to fix |
+| **Manual Control** | Toggle individual ports, profiles, services, and blank password setting |
 
 ### 🔹 NETWORK MAP Mode
-Automatic local network scanning:
-- Discover all active devices
-- Detect open ports
-- Check WinRM availability
-- Save results between sessions
-- Quick switch to control mode
 
----
+Scans local network and displays all found devices.
 
-## 🚀 USER GUIDE
+| Feature | Description |
+|---------|-------------|
+| **Fast/Full/ARP Scan** | Different scan modes for speed vs. thoroughness |
+| **Device Status** | 🟢 Ready, 🟡 No credentials, 🔵 Needs setup, 🔴 Not supported |
+| **Group Actions** | Select multiple 🟢 devices to shutdown or send messages to all at once |
+| **Voice Sync** | Adjustable delay ensures synchronized voice playback across devices |
+| **Column Sorting** | Click headers to sort by Status, IP, Name, WinRM, or Credentials |
 
-### ⚡ Quick Start
-1. Run the program (recommended as administrator)
-2. Select the desired mode:
-   - 🖥️ **PC CONTROL** — for managing already configured PCs
-   - 🛠️ **PC SETUP** — for preparing a computer for remote management
-   - 🗺️ **NETWORK MAP** — for discovering devices on the network
+### ⚙️ SETTINGS
 
----
+| Setting | Description |
+|---------|-------------|
+| Shutdown check delay | Wait time before verifying shutdown (15-99 sec) |
+| Voice sync delay | Delay between devices for group voice (0-3 sec, step 0.1) |
+| Auto-diagnostic | Run diagnostics when entering PC Setup mode |
+| Auto-update | Check for new versions on startup |
+| Language | Russian or English |
+| Theme | Light or dark |
+| Logging | Enable/disable log file writing |
 
-## 🖥️ PC CONTROL MODE
+### 🚀 AUTO-UPDATE
 
-### 🔑 Credentials
-1. Enter the remote computer's IP
-2. Click 💾 **SAVE CREDENTIALS**
-3. Enter username and password (default name can be left)
-4. IP is automatically added to the saved list and TrustedHosts
+- Checks GitHub for new version on startup
+- 🔔 icon appears if update is available
+- Downloads new EXE to program folder
+- «Restart now» button closes old version and opens new one
 
-### 📋 Saved IP List
-- Select IP from the dropdown list
-- Right-click on IP — delete from list
-- 🗑️ **CLEAR IP LIST** button — delete all saved entries
+### 📤 FEEDBACK
 
-### 🔴 Computer Shutdown
-- ⚡ **SHUTDOWN NOW** — immediate shutdown
-- ⏱️ **SHUTDOWN TIMER** — shutdown after N seconds
-- 💬 **SHUTDOWN + TEXT** — show message and shutdown
-- 🎤 **SHUTDOWN + VOICE** — speak message and shutdown
+In «About» window ( **?** button) click **📤 Feedback**:
 
-### 💬 Messages
-- 📝 **TEXT MESSAGE** — send text to remote PC
-- 🗣️ **VOICE MESSAGE** — speak text on remote PC
+1. Describe the issue or suggestion
+2. Enter email for reply (optional)
+3. Click «Send»
 
-### 🔧 Service
-- 🔄 **ENABLE/DISABLE WINRM** — manage WinRM service on your PC
-- 📊 **DIAGNOSTICS** — full connection check
-- 🧹 **CLEAR** — clear output window
+Automatically attaches system info and last 500 log lines.
 
-### ⚙️ Shutdown Modes
-- ⚡ **Simple** — just sends the command
-- 🛡️ **Protected** — checks result and forces shutdown if needed
+### 📝 System Requirements
 
----
+| Component | Requirement |
+|-----------|-------------|
+| OS | Windows 10/11, Windows Server 2019/2022 |
+| Privileges | Administrator (for full functionality) |
+| PowerShell | 5.1+ |
+| .NET Framework | 4.8+ |
 
-## 🛠️ PC SETUP MODE
+### 📞 Contact
 
-### 🚀 Express
-- ⚡ **FAST SETUP** — one-click setup: opens all ports, enables services, configures WinRM
-- 💡 **SMART SETUP** — diagnoses status and suggests what to fix
-
-### 🔌 Advanced Setup (🟩 — open, 🟥 — closed)
-- 🌐 **PORTS** — toggle buttons for ports 445, 139, 5985
-- 🛡️ **PROFILES** — select network profiles (🏠 Private, 🌍 Public, 🏢 Domain)
-- 🔑 **BLANK PASSWORD** — allow/deny password-less login
-- 🖥️ **SERVICES** — manage Server, RemoteRegistry, WinRM services
-
-### 🔧 Service
-- 📊 **DIAGNOSTICS** — full check of ports, services and firewall rules
-- 🗑️ **RESET** — reset all settings (close ports, disable services)
-- 🧹 **CLEAR** — clear output window
-
----
-
-## 🗺️ NETWORK MAP MODE
-
-### 🔍 Scanning
-- ⚡ **FAST** — check main ports (< 1 minute)
-- 🔍 **FULL** — check all ports (1-5 minutes)
-- 📋 **FROM ARP** — view active devices (< 1 minute)
-
-### 📊 Legend
-- 🟢 — WinRM available and credentials saved
-- 🟡 — WinRM available but no credentials
-- ⚪ — WinRM not available
-
-### 🖱️ Actions
-- Double-click — switch to control mode
-- Right-click — context menu with actions
-- ▶/◀ — expand/collapse detailed information
-
-### 💾 Saving Results
-- Results are automatically saved to a temporary file
-- Data is restored when reopening network map
-- 🗑️ **CLEAR RESULTS** button — deletes all saved data
-
----
-
-## ❓ FAQ
-
-### 1. Why does the program require administrator rights?
-Administrator rights are required to modify firewall rules, manage services, and configure WinRM. Without them, most setup mode functions won't work.
-
-### 2. Which ports are needed for remote management?
-- **5985** — WinRM (required)
-- **445** — SMB (for file access, optional)
-- **139** — NetBIOS (for legacy systems, optional)
-
-### 3. Why can't I connect to a remote PC?
-Check in order:
-1. ✅ PC is on and on the network (ping)
-2. ✅ Port 5985 is open (diagnostics)
-3. ✅ WinRM is available (diagnostics)
-4. ✅ Credentials are saved
-5. ✅ WinRM is configured on the remote PC (PC SETUP mode)
-
-### 4. How to set up a new PC for remote management?
-Run RemIP on the target PC, go to **PC SETUP** mode and click ⚡ **FAST SETUP**.
-
-### 5. Is it safe to use a blank password?
-Blank passwords are a potential security threat. Use this option only in isolated local networks. It's recommended to always set a password for accounts.
-
-### 6. Why doesn't the network map see some devices?
-- Device may block ping (ICMP)
-- Firewall may block ports
-- Device may be on a different subnet
-- Try full scan or ARP table scan
-
-### 7. How to delete a saved IP?
-**Method 1:** In CONTROL mode, select the IP from the list, right-click and choose "Delete".  
-**Method 2:** Click 🗑️ **CLEAR IP LIST** to delete all entries.
-
-### 8. Why is the PC not visible in the network map after reboot?
-The IP address may have changed (if using DHCP). Use ARP table scan or set a static IP.
-
-### 9. How to update the program?
-1. Click the "?" next to the close button and check for the update.
-2. Download the new version from GitHub. All saved data will remain in `%APPDATA%\RemIP\`.
-
-### 10. Where are credentials stored?
-All data is stored encrypted in the folder:  
-`%APPDATA%\RemIP\credentials\`
-
----
-
-## 📝 System Requirements
-- **OS:** Windows 10/11, Windows Server 2019/2022
-- **Privileges:** Administrator (for setup mode)
-
----
-
-## 🐛 Known Issues and Solutions
-
-| Problem | Solution |
-|---------|----------|
-| Dialogs don't open | Check that the program isn't running multiple times |
-| PowerShell commands don't work | Run in PowerShell: `Set-ExecutionPolicy RemoteSigned` |
-| Network map doesn't see devices | Check firewall, try ARP scan |
-| Can't save credentials | Check write permissions to `%APPDATA%\RemIP\` folder |
-
----
-
-## 📞 Contact
-For questions and suggestions:
-- 📧 **Email:** dmistr9999@gmail.com
-- 🐙 **GitHub:** https://github.com/dmistr/RemIP
+For questions and suggestions: **dmistr9999@gmail.com**
