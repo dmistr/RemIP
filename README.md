@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/github/downloads/dmistr/Remip/total.svg)](https://github.com/dmistr/Remip/releases)
 
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/dmistr/Remip/main/resources/logo.png" alt="RemIP Logo" width="64" align="center">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/logo_512x512.png" alt="RemIP Logo" width="64" align="center">
   RemIP - Remote IP Control
 </h1>
 
@@ -22,21 +22,21 @@
 
 <div align="center">
 
-[🇷🇺 Русский](#русский) &nbsp;&nbsp;|&nbsp;&nbsp; [🇬🇧 English](#english)
+[Русский](#русский) &nbsp;&nbsp;|&nbsp;&nbsp; [English](#english)
 
 </div>
 
 ---
 
 <a name="русский"></a>
-## 🇷🇺 РУССКИЙ
+## РУССКИЙ
 
 ### 📋 ОПИСАНИЕ ПРОГРАММЫ
 
 **RemIP** — это портативный инструмент для удалённого управления компьютерами в локальной сети. Не требует установки, достаточно запустить EXE-файл. Программа состоит из трёх основных режимов, окна настроек и уникальной **Платформы Умного Агента**.
 
 <p align="center">
-  <img src="[SCREENSHOT_MAIN_MENU]" alt="Главное меню RemIP" width="800">
+  <img src="https://github.com/dmistr/Remip/blob/main/screenshots/screen%201.0.0/Remip_main_rus_dark.png" alt="Главное меню RemIP" width="800">
   <br><i>Главное меню программы</i>
 </p>
 
@@ -60,10 +60,7 @@
 - **Самовосстановление** — агент следит за правилом брандмауэра и восстанавливает его
 - **Контроль версий** — автоматическое определение устаревшей версии и обновление
 
-<p align="center">
-  <img src="[SCREENSHOT_AGENT_INSTALLED]" alt="Агент RemIP в работе" width="400">
   <br><i>Кнопка агента: 🟢 установлен и работает, 🔴 не установлен</i>
-</p>
 
 ---
 
@@ -72,7 +69,7 @@
 Позволяет удалённо управлять компьютерами, на которых уже настроен WinRM.
 
 <p align="center">
-  <img src="[SCREENSHOT_CONTROL_TAB]" alt="Режим Управление ПК" width="800">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_control_rus_dark.png" alt="Режим Управление ПК" width="800">
 </p>
 
 #### 🔑 Учётные данные
@@ -103,7 +100,7 @@
 | **ГОЛОСОВОЕ СООБЩЕНИЕ** | Озвучивает текст на удалённом ПК через `System.Speech.SpeechSynthesizer`. |
 
 <p align="center">
-  <img src="[SCREENSHOT_SCREENSHOT_VIEWER]" alt="Просмотр скриншота" width="800">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/Remip_screen_rus_dark.png" alt="Просмотр скриншота" width="800">
   <br><i>Встроенный просмотрщик скриншотов с зумом и панорамированием</i>
 </p>
 
@@ -129,7 +126,7 @@
 Готовит текущий компьютер к приёму удалённых команд.
 
 <p align="center">
-  <img src="[SCREENSHOT_INSTALL_TAB]" alt="Режим Настройка ПК" width="800">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_install_rus_dark.png" alt="Режим Настройка ПК" width="800">
 </p>
 
 #### 🚀 Экспресс-настройка
@@ -140,7 +137,7 @@
 | **💡 УМНАЯ НАСТРОЙКА** | Диагностирует систему и показывает диалог с выбором: что именно исправить. Вы сами решаете, какие изменения применить. |
 
 <p align="center">
-  <img src="[SCREENSHOT_SMART_FIX]" alt="Диалог Умной настройки" width="500">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_fix_rus_dark.png" alt="Диалог Умной настройки" width="500">
   <br><i>Диалог выбора исправлений в Умной настройке</i>
 </p>
 
@@ -168,7 +165,7 @@
 Сканирует локальную сеть и отображает все устройства.
 
 <p align="center">
-  <img src="[SCREENSHOT_NETWORK_MAP]" alt="Карта сети" width="800">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_map_rus_dark.png" alt="Карта сети" width="800">
   <br><i>Расширенный режим карты сети с групповыми действиями</i>
 </p>
 
@@ -203,7 +200,7 @@
 ### ⚙️ ОКНО НАСТРОЕК
 
 <p align="center">
-  <img src="[SCREENSHOT_SETTINGS]" alt="Окно настроек" width="600">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_setting_rus_dark.png" alt="Окно настроек" width="500">
 </p>
 
 | Настройка | Описание |
@@ -251,14 +248,14 @@
 ---
 
 <a name="english"></a>
-## 🇬🇧 ENGLISH
+## ENGLISH
 
 ### 📋 PROGRAM DESCRIPTION
 
 **RemIP** is a portable tool for remote computer management in local networks. No installation required. It features three main modes, a settings window, and the unique **Smart Agent Platform**.
 
 <p align="center">
-  <img src="[SCREENSHOT_MAIN_MENU]" alt="RemIP Main Menu" width="800">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_main_en_light.png" alt="RemIP Main Menu" width="800">
   <br><i>Main Menu</i>
 </p>
 
@@ -282,16 +279,17 @@ Remip Agent is a lightweight PowerShell server delivered to a remote PC in one c
 - **Self-healing** — monitors and restores its firewall rule.
 - **Version control** — automatically detects outdated versions and updates.
 
-<p align="center">
-  <img src="[SCREENSHOT_AGENT_INSTALLED]" alt="RemIP Agent in action" width="400">
   <br><i>Agent button: 🟢 installed & running, 🔴 not installed</i>
-</p>
 
 ---
 
 ### 🔹 PC CONTROL Mode
 
 Remote management of computers with WinRM already configured.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_control_en_light.png" alt="Режим Управление ПК" width="800">
+</p>
 
 | Feature | Description |
 |---------|-------------|
@@ -307,6 +305,10 @@ Remote management of computers with WinRM already configured.
 
 Prepares the current computer for remote management.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_install_en_light.png" alt="Режим Управление ПК" width="800">
+</p>
+
 | Feature | Description |
 |---------|-------------|
 | **Fast Setup** | One-click configuration: opens ports, enables services, allows blank password, enables Remote UAC, DCOM, RDP. |
@@ -319,6 +321,10 @@ Prepares the current computer for remote management.
 
 Scans the local network and displays all devices.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_map_en_light.png" alt="Режим Управление ПК" width="800">
+</p>
+
 | Feature | Description |
 |---------|-------------|
 | **Fast/Full/ARP Scan** | Different scan modes for speed vs. thoroughness. |
@@ -329,6 +335,10 @@ Scans the local network and displays all devices.
 ---
 
 ### ⚙️ SETTINGS
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/dmistr/Remip/refs/heads/main/screenshots/screen%201.0.0/Remip_setting_en_light.png" alt="Режим Управление ПК" width="500">
+</p>
 
 | Setting | Description |
 |---------|-------------|
